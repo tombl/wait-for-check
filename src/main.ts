@@ -52,7 +52,18 @@ try {
       allCompleted &&= state !== "pending";
 
       outputs[check] = state;
-      core.info(`${check}: ${STATE_SYMBOLS[state]} ${state}`);
+    }
+
+    for (
+      const [state, theseOutputs] of Object.entries(
+        Object.groupBy(Object.entries(outputs), ([, s]) => s),
+      )
+    ) {
+      core.info(
+        `${STATE_SYMBOLS[state as State]} ${state}: ${
+          theseOutputs.map(([o]) => o).join(" ")
+        }`,
+      );
     }
   } while (!allCompleted && (performance.now() - start) < timeout);
 
