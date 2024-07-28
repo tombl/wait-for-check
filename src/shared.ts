@@ -19,6 +19,4 @@ export type CommitStatusState =
     "requestBody"
   ]["content"]["application/json"]["state"];
 
-type NotNull<T> = T extends null ? never : T;
-
 export type State = "pending" | "success" | "failure";

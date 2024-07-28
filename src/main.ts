@@ -41,7 +41,7 @@ try {
         client,
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
-        ref: github.context.ref,
+        ref: github.context.sha,
         appName: slashIdx === -1 ? null : check.slice(0, slashIdx),
         checkName: slashIdx === -1 ? check : check.slice(slashIdx + 1),
       };
