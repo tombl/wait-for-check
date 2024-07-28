@@ -11,3 +11,5 @@ jobs:
           deno-version: v1.x
       - run: deno lint
       - run: deno fmt --check
+      - run: deno check src/main.ts
+      - run: deno test

@@ -1,25 +1,34 @@
-name: 'Deno example action'
-description: 'An example of a Github Action written in Deno'
+name: "Wait for checks"
+description: "Wait for specific checks to complete"
+author: tombl
 
-# Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: 'heart'
-  color: 'red'
+  icon: check-square
+  color: green
 
-# Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
-    required: true
-    default: '1000'
+  token:
+    description: The GitHub token to use for authentication.
+    default: ${{ github.token }}
 
-# Define your outputs here.
+  checks:
+    description: |
+      The names of the checks to wait for (comma separated).
+      Each check is of the form `app-name/check-name` or `check-name`.
+    required: true
+
+  delay:
+    description: How long to wait between checks
+    default: 10s
+
+  timeout:
+    description: How long to wait before giving up
+    default: 10m
+
 outputs:
-  time:
-    description: 'Your output description here'
+  statuses:
+    description: The final status of each check
 
 runs:
   using: node20
-  # pre: bootstrap/pre.mjs
   main: bootstrap/main.mjs
-  # post: bootstrap/post.mjs
