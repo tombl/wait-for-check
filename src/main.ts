@@ -46,8 +46,12 @@ try {
         checkName: slashIdx === -1 ? check : check.slice(slashIdx + 1),
       };
 
-      const state = await getStateOfCheck(context) ??
-        await getStateOfCommit(context);
+      const [checkState, commitState] = await Promise.all([
+        getStateOfCheck(context),
+        getStateOfCommit(context),
+      ]);
+
+      const state = checkState === "pending" ? commitState : checkState;
 
       allCompleted &&= state !== "pending";
 
