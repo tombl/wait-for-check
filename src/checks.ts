@@ -17,9 +17,7 @@ export async function getStateOfCheck(
       },
     )
   ) {
-    run = data.check_runs.findLast((r) =>
-      appName === null || appName === r.app?.slug
-    );
+    run = data.findLast((r) => appName === null || appName === r.app?.slug);
   }
 
   if (run?.status === "completed") {
